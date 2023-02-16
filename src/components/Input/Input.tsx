@@ -59,6 +59,8 @@ export const Input = ({
   // Use `defaultValue` if provided
   const [text, setText] = React.useState(textInputProps?.defaultValue ?? '')
 
+  const textInput = React.useRef();
+
   const value = textInputProps?.value ?? text
 
   const handleChangeText = (newText: string) => {
@@ -70,9 +72,12 @@ export const Input = ({
   const handleKeyPress = (e: any) => {
     textInputProps?.onKeyPress?.(e); // in case they set one
     if (e.nativeEvent.key == 'Enter') {
-      console.log('sendOnEnter is '+sendOnEnter);
       if (sendOnEnter) {
-        handleSend();
+        setTimeout(() => {
+          console.log('sending');
+          handleSend();
+          setText('');
+        }, 0);
       }
     }
   }
@@ -109,6 +114,7 @@ export const Input = ({
           )
         ))}
       <TextInput
+        ref={textInput}
         multiline
         placeholder={l10n.inputPlaceholder}
         placeholderTextColor={`${String(theme.colors.inputText)}80`}

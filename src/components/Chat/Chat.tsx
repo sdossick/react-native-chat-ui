@@ -127,6 +127,7 @@ export const Chat = ({
   renderImageMessage,
   renderTextMessage,
   sendButtonVisibilityMode = 'editing',
+  sendOnEnter,
   showUserAvatars = false,
   showUserNames = false,
   textInputProps,
@@ -425,6 +426,7 @@ export const Chat = ({
                     onSendPress,
                     renderScrollable,
                     sendButtonVisibilityMode,
+                    sendOnEnter,
                     textInputProps,
                   }}
                 />

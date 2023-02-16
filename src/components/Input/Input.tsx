@@ -59,7 +59,7 @@ export const Input = ({
   // Use `defaultValue` if provided
   const [text, setText] = React.useState(textInputProps?.defaultValue ?? '')
 
-  const theTextInput = React.useRef();
+  const theTextInput = React.useRef<TextInput>(null);
 
   const value = textInputProps?.value ?? text
 
@@ -73,11 +73,10 @@ export const Input = ({
     textInputProps?.onKeyPress?.(e); // in case they set one
     if (e.nativeEvent.key == 'Enter') {
       if (sendOnEnter) {
-        setTimeout(() => {
-          console.log('sending');
-          handleSend();
-          setText('');
-        }, 0);
+        console.log('sending');
+        handleSend();
+        setText('');
+        theTextInput?.current?.clear();
       }
     }
   }
@@ -123,6 +122,7 @@ export const Input = ({
         style={[input, textInputProps?.style]}
         onChangeText={handleChangeText}
         onKeyPress={handleKeyPress}
+        ref={theTextInput}
         value={value}
       />
       {sendButtonVisibilityMode === 'always' ||

@@ -59,7 +59,7 @@ export const Input = ({
   // Use `defaultValue` if provided
   const [text, setText] = React.useState(textInputProps?.defaultValue ?? '')
 
-  const textInput = React.useRef();
+  const theTextInput = React.useRef();
 
   const value = textInputProps?.value ?? text
 
@@ -114,7 +114,6 @@ export const Input = ({
           )
         ))}
       <TextInput
-        ref={textInput}
         multiline
         placeholder={l10n.inputPlaceholder}
         placeholderTextColor={`${String(theme.colors.inputText)}80`}

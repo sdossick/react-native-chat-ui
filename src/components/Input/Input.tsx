@@ -68,10 +68,12 @@ export const Input = ({
   }
 
   const handleKeyPress = (e: any) => {
-    if (e.nativeEvent.key == 'Enter') {
-      console.log('should send');
-    }
     textInputProps?.onKeyPress?.(e); // in case they set one
+    if (e.nativeEvent.key == 'Enter') {
+      if (sendOnEnter) {
+        handleSend();
+      }
+    }
   }
 
   const handleSend = () => {

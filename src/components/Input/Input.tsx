@@ -70,6 +70,7 @@ export const Input = ({
   const handleKeyPress = (e: any) => {
     textInputProps?.onKeyPress?.(e); // in case they set one
     if (e.nativeEvent.key == 'Enter') {
+      console.log('sendOnEnter is '+sendOnEnter);
       if (sendOnEnter) {
         handleSend();
       }

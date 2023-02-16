@@ -76,7 +76,7 @@ export const Input = ({
         console.log('sending');
         handleSend();
         setText('');
-        theTextInput?.current?.clear();
+//        theTextInput?.current?.clear();
       }
     }
   }
@@ -122,7 +122,6 @@ export const Input = ({
         style={[input, textInputProps?.style]}
         onChangeText={handleChangeText}
         onKeyPress={handleKeyPress}
-        ref={theTextInput}
         value={value}
       />
       {sendButtonVisibilityMode === 'always' ||

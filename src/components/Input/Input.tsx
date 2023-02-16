@@ -28,6 +28,7 @@ export interface InputTopLevelProps {
   /** Controls the visibility behavior of the {@link SendButton} based on the
    * `TextInput` state. Defaults to `editing`. */
   sendButtonVisibilityMode?: 'always' | 'editing'
+  sendOnEnter?: boolean
   textInputProps?: TextInputProps
 }
 
@@ -47,6 +48,7 @@ export const Input = ({
   onAttachmentPress,
   onSendPress,
   sendButtonVisibilityMode,
+  sendOnEnter,
   textInputProps,
 }: InputProps) => {
   const l10n = React.useContext(L10nContext)
@@ -63,6 +65,13 @@ export const Input = ({
     // Track local state in case `onChangeText` is provided and `value` is not
     setText(newText)
     textInputProps?.onChangeText?.(newText)
+  }
+
+  const handleKeyPress = (e: any) => {
+    if (e.nativeEvent.key == 'Enter') {
+      console.log('should send');
+    }
+    textInputProps?.onKeyPress?.(e); // in case they set one
   }
 
   const handleSend = () => {
@@ -105,6 +114,7 @@ export const Input = ({
         // Keep our implementation but allow user to use these `TextInputProps`
         style={[input, textInputProps?.style]}
         onChangeText={handleChangeText}
+        onKeyPress={handleKeyPress}
         value={value}
       />
       {sendButtonVisibilityMode === 'always' ||
